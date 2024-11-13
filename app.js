@@ -1,47 +1,84 @@
 import express from "express";
 import bodyParser from "body-parser";
-import fetch from "node-fetch";  // ES Module import
+import fetch from "node-fetch";
 import Tesseract from "tesseract.js";
 import dotenv from "dotenv";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-dotenv.config(); // Load environment variables
+dotenv.config();
 
 const app = express();
 const PORT = 3000;
 
 app.use(bodyParser.json());
 
-// Gemini API setup
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-// Route for testing Gemini model
 app.get("/", (req, res) => {
   res.send("Welcome, Gemini and OCR features are active.");
 });
 
-// Route for generating content using Gemini AI
 app.post("/api/gemini/content", async (req, res) => {
   const { question } = req.body;
 
   if (!question) {
-    return res.status(400).json({ error: "Question is required" });
+    return res.status(400).json({ error: "Question data is required" });
   }
 
   try {
-    const result = await model.generateContent(question);
-    res.json({
-      result: result.response.text(),
+    const questionString = JSON.stringify(question);
+
+    const instruction = `Given the following list of form fields in JSON format:
+${questionString}
+
+For each question object in the array:
+1. Combine the "text" and "description" fields (if the "description" field is not null) to create a full question prompt.
+2. If "options" are present in the question, always select one of the provided options as the answer. Do not provide a descriptive or long answer if "options" are present; only select from the options array.
+3. If "options" is empty, generate a relevant, short free-text answer.
+4. Provide a response in the following JSON format:
+{
+  "fullQuestion": "The combined question text",
+  "answer": "The selected option or generated answer"
+}`;
+
+    const chatSession = model.startChat({
+      generationConfig: {
+        temperature: 0.7,
+        topP: 0.8,
+        topK: 40,
+        maxOutputTokens: 1024,
+      },
+      history: [],
     });
-    console.log(result.response.text());
+
+    const aiResult = await chatSession.sendMessage(instruction);
+    let responseText = aiResult.response.text();
+
+    console.log("Raw AI Response:", responseText); // Log raw response for debugging
+
+    // Try to extract valid JSON
+    const jsonMatch = responseText.match(/\[.*\]/s); // Match any array starting with "[" and ending with "]"
+    if (jsonMatch) {
+      responseText = jsonMatch[0];
+    } else {
+      console.log("No valid JSON found in the response");
+      throw new Error("Invalid JSON format received from AI model");
+    }
+
+    // Attempt to parse the cleaned JSON response
+    const responseJson = JSON.parse(responseText);
+
+    res.json({
+      result: responseJson,
+    });
+    console.log("Parsed AI Response:", responseJson);
   } catch (e) {
-    console.log("Error:", e);
-    res.status(500).json({ error: "Failed to generate content" });
+    console.error("Error in content generation:", e);
+    res.status(500).json({ error: "Failed to generate content or invalid JSON response" });
   }
 });
 
-// OCR (Text extraction from image) API
 app.post("/extract-text", async (req, res) => {
   const { imageUrl } = req.body;
 
@@ -68,7 +105,6 @@ app.post("/extract-text", async (req, res) => {
   }
 });
 
-// Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
