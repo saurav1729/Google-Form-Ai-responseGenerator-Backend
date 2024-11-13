@@ -15,6 +15,8 @@ app.use(bodyParser.json());
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
+app.use(cors('*'));
+
 app.get("/", (req, res) => {
   res.send("Welcome, Gemini and OCR features are active.");
 });
