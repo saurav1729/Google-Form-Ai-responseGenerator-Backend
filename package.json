@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start":"node app.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm ci"
   },
@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "@google-cloud/vision": "^4.3.2",
+    "express": "^4.21.1",
     "tesseract.js": "^5.1.1"
   }
 }
