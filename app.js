@@ -4,6 +4,7 @@ import fetch from "node-fetch";
 import Tesseract from "tesseract.js";
 import dotenv from "dotenv";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import cors from "cors";
 
 dotenv.config();
 
