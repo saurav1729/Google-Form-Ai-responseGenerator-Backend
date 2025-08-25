@@ -22,15 +22,14 @@
         </tr>
      </thead>
     <tbody>
-         <tr>
-            <td><img alt="Stars" src="https://img.shields.io/github/stars/VinamraSaurav/Google-Form-AI-Response-Extension?style=flat&logo=github"/></td>
-            <td><img alt="Forks" src="https://img.shields.io/github/forks/VinamraSaurav/Google-Form-AI-Response-Extension?style=flat&logo=github"/></td>
-            <td><img alt="Issues" src="https://img.shields.io/github/issues/VinamraSaurav/Google-Form-AI-Response-Extension?style=flat&logo=github"/></td>
-            <td><img alt="Open Pull Requests" src="https://img.shields.io/github/issues-pr/VinamraSaurav/Google-Form-AI-Response-Extension?style=flat&logo=github"/></td>
-            <td><img alt="Closed Pull Requests" src="https://img.shields.io/github/issues-pr-closed/VinamraSaurav/Google-Form-AI-Response-Extension?style=flat&color=critical&logo=github"/></td>
-            <td><img alt="GitHub language count" src="https://img.shields.io/github/languages/count/VinamraSaurav/Google-Form-AI-Response-Extension?style=flat&color=green&logo=github"/></td>
-            <td><img alt="GitHub Contributors count" src="https://img.shields.io/github/contributors/VinamraSaurav/Google-Form-AI-Response-Extension?style=flat&color=blue&logo=github"/></td>
-        </tr>
+         <tr><td><img alt="Stars" src="https://img.shields.io/github/stars/saurav1729/Google-Form-Ai-responseGenerator-Backend?style=flat&logo=github"/></td>
+<td><img alt="Forks" src="https://img.shields.io/github/forks/saurav1729/Google-Form-Ai-responseGenerator-Backend?style=flat&logo=github"/></td>
+<td><img alt="Issues" src="https://img.shields.io/github/issues/saurav1729/Google-Form-Ai-responseGenerator-Backend?style=flat&logo=github"/></td>
+<td><img alt="Open Pull Requests" src="https://img.shields.io/github/issues-pr/saurav1729/Google-Form-Ai-responseGenerator-Backend?style=flat&logo=github"/></td>
+<td><img alt="Closed Pull Requests" src="https://img.shields.io/github/issues-pr-closed/saurav1729/Google-Form-Ai-responseGenerator-Backend?style=flat&color=critical&logo=github"/></td>
+<td><img alt="GitHub language count" src="https://img.shields.io/github/languages/count/saurav1729/Google-Form-Ai-responseGenerator-Backend?style=flat&color=green&logo=github"/></td>
+<td><img alt="GitHub Contributors count" src="https://img.shields.io/github/contributors/saurav1729/Google-Form-Ai-responseGenerator-Backend?style=flat&color=blue&logo=github"/></td>
+    </tr>
     </tbody>
 </table>
 </div>
